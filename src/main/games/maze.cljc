@@ -17,14 +17,6 @@
      :start (contains? cells :start)
      :end   (contains? cells :end)}))
 
-;(def temp-maze
-;  {:height 4
-;   :width  5
-;   :cells  [(cell-for-ui 0 0 :start :west) (cell-for-ui 1 0 :north :west) (cell-for-ui 2 0 :north) (cell-for-ui 3 0 :north) (cell-for-ui 4 0 :north :east)
-;            (cell-for-ui 0 1 :west) (cell-for-ui 1 1 :north) (cell-for-ui 2 1) (cell-for-ui 3 1 :west) (cell-for-ui 4 1 :west :east)
-;            (cell-for-ui 0 2 :north :west) (cell-for-ui 1 2) (cell-for-ui 2 2 :north) (cell-for-ui 3 2 :west) (cell-for-ui 4 2 :west :east)
-;            (cell-for-ui 0 3 :north :west :south) (cell-for-ui 1 3 :north :south) (cell-for-ui 2 3 :south) (cell-for-ui 3 3 :end :north) (cell-for-ui 4 3 :east :west :south)]})
-
 (defn- maze-neighbors [{:keys [x y]} {:keys [width height cells] :as maze}]
   (let [surrounding-cells {:north {:x x :y (- y 1)}
                            :south {:x x :y (+ y 1)}
@@ -108,12 +100,7 @@
       maze
       (recur rng maze unvisited-indexes))))
 
-; if there are neighbors (including the maze itself)
-;   pick a random neighbor and add to the list
-; else
-;   look at earlier part of path and try again
-
-(defn generate [{:keys [height width start-cell end-cell seed] :or {height 10 width 10 start-cell [:top :left] end-cell [:bottom :right]}}]
+(defn- generate [{:keys [height width start-cell end-cell seed] :or {height 10 width 10 start-cell [:top :left] end-cell [:bottom :right]}}]
   (let [rng (random/rng (or seed (rand-int 1000000000)))
         cells (vec (populate height width))
         [starting-index unvisited-indexes] (rand-from-coll rng (range (count cells)))
@@ -130,10 +117,18 @@
         m (assoc m :cells new-cells)]
     m))
 
+(defn- compute-class-name [cell]
+  (->> (select-keys cell [:north :east :south :west :start :end])
+       (filter (comp true? last))
+       (map first)
+       (map name)))
 
-;(maze-gen initial-maze)))
-; pick starting point (using rng) and add it to the maze with no parent or children
-; call (maze-gen [start-cell [] {:height height :width width :cells [start-cell]})
-
-
-
+(defn display-maze [{:keys [seed height width]}]
+  (let [{:keys [cells] :as maze} (generate {:seed seed :height height :width width})
+        cells (sort-by (juxt :y :x) cells)]
+    [:div.maze.rectangle
+     (for [y (range height)]
+       [:div.row
+        (for [x (range width)]
+          (let [i (+ (* y width) x)]
+            [:span.cell {:class (compute-class-name (nth cells i)) :data-test (str "(" x ", " y ")")}]))])]))

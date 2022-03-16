@@ -1,6 +1,5 @@
 (ns games.ui
   (:require [games.maze :as maze]
-            [games.random :as random]
             [reitit.frontend :as rf]
             [reitit.frontend.controllers :as rfc]
             [reitit.frontend.easy :as rfe]
@@ -8,28 +7,53 @@
             [rum.core :as rum :refer-macros [defc]]
             [schema.core :as s]))
 
-(defonce page (atom {:location :home}))
+(defc homepage []
+  [:div
+   [:h2 "Welcome"]
+   [:ul [:li [:a {:href (rfe/href ::maze {:width 10 :height 10 :seed (rand-int 99999999)})} "Maze"]]]])
 
-(defn compute-class-name [cell]
-  (->> (select-keys cell [:north :east :south :west :start :end])
-       (filter (comp true? last))
-       (map first)
-       (map name)))
+(defc display-maze [{{path :path} :parameters}]
+  [:div
+   [:h2 "Maze"]
+   [:navigation.nav
+    (let [s (rand-int 999999999)]
+      (for [d [10 20 30 40 50]]
+        [:span [:a {:href (rfe/href ::maze {:width d :height d :seed s})} d "x" d] " "]))]
+   (maze/display-maze path)])
 
-(defc display-maze [{:keys [height width cells]}]
-  (let [cells (sort-by (juxt :y :x) cells)]
-    [:div.maze.rectangle
-     (for [y (range height)]
-       [:div.row
-        (for [x (range width)]
-          (let [i (+ (* y width) x)]
-            [:span.cell {:class (compute-class-name (nth cells i)) :data-test (str "(" x ", " y ")")}]))])]))
+(defonce page (atom nil))
 
 (defc root < rum/reactive []
-  (let [seed 98293889112244]
+  (let [p (rum/react page)]
     [:div
-     [:h1 "A-maze-ing"]
-     [:div (display-maze (maze/generate {:seed seed :height 70 :width 60}))]]))
+     [:a {:href (rfe/href ::home)} [:h1 "MB Games"]]
+     (when p
+       (let [view (:view (:data p))]
+         (view p)))]))
+
+;(defc root []
+;  [:div "hello?"])
+
+(def routes
+  (rf/router
+    ["/"
+     ["" {:name ::home
+          :view homepage}]
+     ["maze/w/:width/h/:height/s/:seed" {:name       ::maze
+                                         :view       display-maze
+                                         :parameters {:path {:width  s/Int
+                                                             :height s/Int
+                                                             :seed   s/Int}}}]]
+    {:data {:coercion rsc/coercion}}))
 
 (defn ^:export start []
+  (rfe/start!
+    routes
+    (fn [new-match]
+      (println :new-match new-match)
+      (swap! page (fn [old-match]
+                    (println :old-match old-match)
+                    (when new-match
+                      (assoc new-match :controllers (rfc/apply-controllers (:controllers old-match) new-match))))))
+    {:use-fragment false})
   (rum/mount (root) (.getElementById js/document "app")))
