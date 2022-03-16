@@ -54,9 +54,10 @@
     {:i (cell-index {:x w :y h} {:width width}) :x w :y h :connected-neighbors #{} :connected-directions #{}}))
 
 (defn- rand-from-coll [rng coll]
-  (let [indx (random/random-int (count coll) rng)
-        [cell coll] (util/pop-i coll indx)]
-    [cell coll]))
+  (when (not-empty coll)
+    (let [indx (random/random-int (count coll) rng)
+          [cell coll] (util/pop-i coll indx)]
+      [cell coll])))
 
 (defn- direction-compliment [direction]
   (condp = direction
@@ -65,19 +66,11 @@
     :east :west
     :west :east))
 
-(defn- dead-end [maze] ;todo work on this
-  (println :we've-come-to-a-dead-end)
-  (cljs.pprint/pprint maze))
-
-(defn- retry-cell [rng path maze]
+(defn- retry-cell [rng path retried-cells]
   (as-> path $
-       (filter #(not (:revisited %)) $)
+       (filter #(not (contains? retried-cells %)) $)
+       (remove nil? $)
        (random/random-nth $ rng)))
-
-; while there are cells that have not been added to the maze
-; pick a cell randomly add it to the maze
-; pick another cell randomly
-; create a random walk until you meet a cell already in the maze avoiding creating loops in the current walk
 
 (defn cell-in-maze? [{:keys [cell]}]
   (or (:initial-cell? cell)
@@ -90,34 +83,27 @@
       (update-in [:cells to-index :connected-neighbors] conj from-index)
       (update-in [:cells to-index :connected-directions] conj (direction-compliment direction))))
 
-(defn- path-gen [rng selected-index path-indexes maze unvisited-cells]
-  (println :selected-index selected-index)
+(defn- path-gen [rng selected-index path-indexes maze unvisited-cells {:keys [prev-maze prev-unvisited-cells retried-cells] :as opts}]
   (let [cell (nth (:cells maze) selected-index)
         eligible-neighbors (filter (fn [c]
                                      (not (some path-indexes [(:index c)])))
                                    (maze-neighbors cell maze))
         {new-index :index :as new-cell} (random/random-nth eligible-neighbors rng)]
-    (println :new-cell new-cell (cell-in-maze? new-cell))
-    (cond (= 0 (count eligible-neighbors)) (let [maze (assoc-in maze [:cells selected-index :revisited?] true)
-                                                 retry-c (retry-cell rng path-indexes maze)]
-                                             (recur rng retry-c (conj path-indexes new-index) maze (remove #(= new-index %) unvisited-cells))) ; recur on a previous cell in the path, mark cell with :path-checked
+    (cond (= 0 (count eligible-neighbors)) (let [retried-cells (conj (or retried-cells #{}) selected-index)
+                                                 retry-c (retry-cell rng path-indexes (or retried-cells {}))
+                                                 retried-cells (conj retried-cells retry-c)]
+                                             (recur rng retry-c (conj path-indexes new-index) maze (remove #(= new-index %) unvisited-cells) (assoc opts :retried-cells retried-cells))) ; recur on a previous cell in the path, mark cell with :path-checked
           (cell-in-maze? new-cell) [(mark-neighbors maze selected-index new-index (:direction new-cell))
                                     unvisited-cells]
           :else (let [new-path (conj path-indexes new-index)
                       new-maze (mark-neighbors maze selected-index new-index (:direction new-cell))
                       unvisited-cells (remove #(= new-index %) unvisited-cells)]
-                  (recur rng new-index new-path new-maze (remove #(= new-index %) unvisited-cells)))))) ; todo temporary, change this
-; does the selected cell have neighbors that are not already part of the path?
-;   select a random neighbor (that exists and is not part of the path
-;   is it part of the maze already
-;     join it to the maze
-; mark this cell as a dead-end and check one of the previous cells (it should not be possible for all parts of a path to be a dead end as at least one should be able to connect to the maze)
-
+                  (recur rng new-index new-path new-maze (remove #(= new-index %) unvisited-cells) opts)))))
 
 (defn- maze-gen [rng current-maze unvisited-indexes]
   ; pick a cell at random
   (let [[new-index unvisited-indexes] (rand-from-coll rng unvisited-indexes)
-        [maze unvisited-indexes] (path-gen rng new-index #{new-index} current-maze unvisited-indexes)]
+        [maze unvisited-indexes] (path-gen rng new-index #{new-index} current-maze unvisited-indexes {:prev-maze current-maze :prev-unvisited-cells unvisited-indexes})]
     (if (empty? unvisited-indexes)
       maze
       (recur rng maze unvisited-indexes))))
@@ -136,13 +122,12 @@
         m (maze-gen rng initial-maze unvisited-indexes)
         new-cells (map (fn [{:keys [x y connected-directions] :as cell}]
                          (let [borders (s/difference #{:north :south :east :west} connected-directions)
-                               borders (cond (and (= x 0) (= y 0)) (conj borders :start)
-                                             (and (= x (- width 1)) (= y (- height 1))) (conj borders :end)
+                               borders (cond (and (= x 0) (= y 0)) (disj (conj borders :start) :north)
+                                             (and (= x (- width 1)) (= y (- height 1))) (disj (conj borders :end) :south)
                                              :else borders)]
                            (cell-for-ui x y borders)))
                        (:cells m))
         m (assoc m :cells new-cells)]
-    (cljs.pprint/pprint m)
     m))
 
 

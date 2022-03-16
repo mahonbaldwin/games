@@ -6,51 +6,51 @@ maze_generator.ui.page = cljs.core.atom.cljs$core$IFn$_invoke$arity$1(new cljs.c
 maze_generator.ui.compute_class_name = (function maze_generator$ui$compute_class_name(cell){
 return cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.name,cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.first,cljs.core.filter.cljs$core$IFn$_invoke$arity$2(cljs.core.comp.cljs$core$IFn$_invoke$arity$2(cljs.core.true_QMARK_,cljs.core.last),cljs.core.select_keys(cell,new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"north","north",651323902),new cljs.core.Keyword(null,"east","east",1189821678),new cljs.core.Keyword(null,"south","south",1586796293),new cljs.core.Keyword(null,"west","west",708776677),new cljs.core.Keyword(null,"start","start",-355208981),new cljs.core.Keyword(null,"end","end",-268185958)], null)))));
 });
-maze_generator.ui.display_maze = rum.core.lazy_build(rum.core.build_defc,(function (p__46497){
-var map__46498 = p__46497;
-var map__46498__$1 = cljs.core.__destructure_map(map__46498);
-var height = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__46498__$1,new cljs.core.Keyword(null,"height","height",1025178622));
-var width = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__46498__$1,new cljs.core.Keyword(null,"width","width",-384071477));
-var cells = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__46498__$1,new cljs.core.Keyword(null,"cells","cells",-985166822));
+maze_generator.ui.display_maze = rum.core.lazy_build(rum.core.build_defc,(function (p__45812){
+var map__45813 = p__45812;
+var map__45813__$1 = cljs.core.__destructure_map(map__45813);
+var height = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__45813__$1,new cljs.core.Keyword(null,"height","height",1025178622));
+var width = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__45813__$1,new cljs.core.Keyword(null,"width","width",-384071477));
+var cells = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__45813__$1,new cljs.core.Keyword(null,"cells","cells",-985166822));
 var cells__$1 = cljs.core.sort_by.cljs$core$IFn$_invoke$arity$2(cljs.core.juxt.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"y","y",-1757859776),new cljs.core.Keyword(null,"x","x",2099068185)),cells);
-return daiquiri.core.create_element("div",{'className':"maze rectangle"},[cljs.core.into_array.cljs$core$IFn$_invoke$arity$1((function (){var iter__4652__auto__ = (function maze_generator$ui$iter__46499(s__46500){
+return daiquiri.core.create_element("div",{'className':"maze rectangle"},[cljs.core.into_array.cljs$core$IFn$_invoke$arity$1((function (){var iter__4652__auto__ = (function maze_generator$ui$iter__45814(s__45815){
 return (new cljs.core.LazySeq(null,(function (){
-var s__46500__$1 = s__46500;
+var s__45815__$1 = s__45815;
 while(true){
-var temp__5753__auto__ = cljs.core.seq(s__46500__$1);
+var temp__5753__auto__ = cljs.core.seq(s__45815__$1);
 if(temp__5753__auto__){
-var s__46500__$2 = temp__5753__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__46500__$2)){
-var c__4650__auto__ = cljs.core.chunk_first(s__46500__$2);
+var s__45815__$2 = temp__5753__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__45815__$2)){
+var c__4650__auto__ = cljs.core.chunk_first(s__45815__$2);
 var size__4651__auto__ = cljs.core.count(c__4650__auto__);
-var b__46502 = cljs.core.chunk_buffer(size__4651__auto__);
-if((function (){var i__46501 = (0);
+var b__45817 = cljs.core.chunk_buffer(size__4651__auto__);
+if((function (){var i__45816 = (0);
 while(true){
-if((i__46501 < size__4651__auto__)){
-var y = cljs.core._nth(c__4650__auto__,i__46501);
-cljs.core.chunk_append(b__46502,daiquiri.core.create_element("div",{'className':"row"},[cljs.core.into_array.cljs$core$IFn$_invoke$arity$1((function (){var iter__4652__auto__ = ((function (i__46501,y,c__4650__auto__,size__4651__auto__,b__46502,s__46500__$2,temp__5753__auto__,cells__$1,map__46498,map__46498__$1,height,width,cells){
-return (function maze_generator$ui$iter__46499_$_iter__46503(s__46504){
-return (new cljs.core.LazySeq(null,((function (i__46501,y,c__4650__auto__,size__4651__auto__,b__46502,s__46500__$2,temp__5753__auto__,cells__$1,map__46498,map__46498__$1,height,width,cells){
+if((i__45816 < size__4651__auto__)){
+var y = cljs.core._nth(c__4650__auto__,i__45816);
+cljs.core.chunk_append(b__45817,daiquiri.core.create_element("div",{'className':"row"},[cljs.core.into_array.cljs$core$IFn$_invoke$arity$1((function (){var iter__4652__auto__ = ((function (i__45816,y,c__4650__auto__,size__4651__auto__,b__45817,s__45815__$2,temp__5753__auto__,cells__$1,map__45813,map__45813__$1,height,width,cells){
+return (function maze_generator$ui$iter__45814_$_iter__45818(s__45819){
+return (new cljs.core.LazySeq(null,((function (i__45816,y,c__4650__auto__,size__4651__auto__,b__45817,s__45815__$2,temp__5753__auto__,cells__$1,map__45813,map__45813__$1,height,width,cells){
 return (function (){
-var s__46504__$1 = s__46504;
+var s__45819__$1 = s__45819;
 while(true){
-var temp__5753__auto____$1 = cljs.core.seq(s__46504__$1);
+var temp__5753__auto____$1 = cljs.core.seq(s__45819__$1);
 if(temp__5753__auto____$1){
-var s__46504__$2 = temp__5753__auto____$1;
-if(cljs.core.chunked_seq_QMARK_(s__46504__$2)){
-var c__4650__auto____$1 = cljs.core.chunk_first(s__46504__$2);
+var s__45819__$2 = temp__5753__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__45819__$2)){
+var c__4650__auto____$1 = cljs.core.chunk_first(s__45819__$2);
 var size__4651__auto____$1 = cljs.core.count(c__4650__auto____$1);
-var b__46506 = cljs.core.chunk_buffer(size__4651__auto____$1);
-if((function (){var i__46505 = (0);
+var b__45821 = cljs.core.chunk_buffer(size__4651__auto____$1);
+if((function (){var i__45820 = (0);
 while(true){
-if((i__46505 < size__4651__auto____$1)){
-var x = cljs.core._nth(c__4650__auto____$1,i__46505);
-cljs.core.chunk_append(b__46506,(function (){var i = ((y * width) + x);
+if((i__45820 < size__4651__auto____$1)){
+var x = cljs.core._nth(c__4650__auto____$1,i__45820);
+cljs.core.chunk_append(b__45821,(function (){var i = ((y * width) + x);
 return daiquiri.core.create_element("span",{'data-test':["(",cljs.core.str.cljs$core$IFn$_invoke$arity$1(x),", ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(y),")"].join(''),'className':daiquiri.util.join_classes(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["cell",maze_generator.ui.compute_class_name(cljs.core.nth.cljs$core$IFn$_invoke$arity$2(cells__$1,i))], null))},[]);
 })());
 
-var G__46513 = (i__46505 + (1));
-i__46505 = G__46513;
+var G__45841 = (i__45820 + (1));
+i__45820 = G__45841;
 continue;
 } else {
 return true;
@@ -58,30 +58,30 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__46506),maze_generator$ui$iter__46499_$_iter__46503(cljs.core.chunk_rest(s__46504__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__45821),maze_generator$ui$iter__45814_$_iter__45818(cljs.core.chunk_rest(s__45819__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__46506),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__45821),null);
 }
 } else {
-var x = cljs.core.first(s__46504__$2);
+var x = cljs.core.first(s__45819__$2);
 return cljs.core.cons((function (){var i = ((y * width) + x);
 return daiquiri.core.create_element("span",{'data-test':["(",cljs.core.str.cljs$core$IFn$_invoke$arity$1(x),", ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(y),")"].join(''),'className':daiquiri.util.join_classes(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["cell",maze_generator.ui.compute_class_name(cljs.core.nth.cljs$core$IFn$_invoke$arity$2(cells__$1,i))], null))},[]);
-})(),maze_generator$ui$iter__46499_$_iter__46503(cljs.core.rest(s__46504__$2)));
+})(),maze_generator$ui$iter__45814_$_iter__45818(cljs.core.rest(s__45819__$2)));
 }
 } else {
 return null;
 }
 break;
 }
-});})(i__46501,y,c__4650__auto__,size__4651__auto__,b__46502,s__46500__$2,temp__5753__auto__,cells__$1,map__46498,map__46498__$1,height,width,cells))
+});})(i__45816,y,c__4650__auto__,size__4651__auto__,b__45817,s__45815__$2,temp__5753__auto__,cells__$1,map__45813,map__45813__$1,height,width,cells))
 ,null,null));
-});})(i__46501,y,c__4650__auto__,size__4651__auto__,b__46502,s__46500__$2,temp__5753__auto__,cells__$1,map__46498,map__46498__$1,height,width,cells))
+});})(i__45816,y,c__4650__auto__,size__4651__auto__,b__45817,s__45815__$2,temp__5753__auto__,cells__$1,map__45813,map__45813__$1,height,width,cells))
 ;
 return iter__4652__auto__(cljs.core.range.cljs$core$IFn$_invoke$arity$1(width));
 })())]));
 
-var G__46514 = (i__46501 + (1));
-i__46501 = G__46514;
+var G__45842 = (i__45816 + (1));
+i__45816 = G__45842;
 continue;
 } else {
 return true;
@@ -89,34 +89,34 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__46502),maze_generator$ui$iter__46499(cljs.core.chunk_rest(s__46500__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__45817),maze_generator$ui$iter__45814(cljs.core.chunk_rest(s__45815__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__46502),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__45817),null);
 }
 } else {
-var y = cljs.core.first(s__46500__$2);
-return cljs.core.cons(daiquiri.core.create_element("div",{'className':"row"},[cljs.core.into_array.cljs$core$IFn$_invoke$arity$1((function (){var iter__4652__auto__ = ((function (y,s__46500__$2,temp__5753__auto__,cells__$1,map__46498,map__46498__$1,height,width,cells){
-return (function maze_generator$ui$iter__46499_$_iter__46507(s__46508){
+var y = cljs.core.first(s__45815__$2);
+return cljs.core.cons(daiquiri.core.create_element("div",{'className':"row"},[cljs.core.into_array.cljs$core$IFn$_invoke$arity$1((function (){var iter__4652__auto__ = ((function (y,s__45815__$2,temp__5753__auto__,cells__$1,map__45813,map__45813__$1,height,width,cells){
+return (function maze_generator$ui$iter__45814_$_iter__45832(s__45833){
 return (new cljs.core.LazySeq(null,(function (){
-var s__46508__$1 = s__46508;
+var s__45833__$1 = s__45833;
 while(true){
-var temp__5753__auto____$1 = cljs.core.seq(s__46508__$1);
+var temp__5753__auto____$1 = cljs.core.seq(s__45833__$1);
 if(temp__5753__auto____$1){
-var s__46508__$2 = temp__5753__auto____$1;
-if(cljs.core.chunked_seq_QMARK_(s__46508__$2)){
-var c__4650__auto__ = cljs.core.chunk_first(s__46508__$2);
+var s__45833__$2 = temp__5753__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__45833__$2)){
+var c__4650__auto__ = cljs.core.chunk_first(s__45833__$2);
 var size__4651__auto__ = cljs.core.count(c__4650__auto__);
-var b__46510 = cljs.core.chunk_buffer(size__4651__auto__);
-if((function (){var i__46509 = (0);
+var b__45835 = cljs.core.chunk_buffer(size__4651__auto__);
+if((function (){var i__45834 = (0);
 while(true){
-if((i__46509 < size__4651__auto__)){
-var x = cljs.core._nth(c__4650__auto__,i__46509);
-cljs.core.chunk_append(b__46510,(function (){var i = ((y * width) + x);
+if((i__45834 < size__4651__auto__)){
+var x = cljs.core._nth(c__4650__auto__,i__45834);
+cljs.core.chunk_append(b__45835,(function (){var i = ((y * width) + x);
 return daiquiri.core.create_element("span",{'data-test':["(",cljs.core.str.cljs$core$IFn$_invoke$arity$1(x),", ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(y),")"].join(''),'className':daiquiri.util.join_classes(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["cell",maze_generator.ui.compute_class_name(cljs.core.nth.cljs$core$IFn$_invoke$arity$2(cells__$1,i))], null))},[]);
 })());
 
-var G__46515 = (i__46509 + (1));
-i__46509 = G__46515;
+var G__45843 = (i__45834 + (1));
+i__45834 = G__45843;
 continue;
 } else {
 return true;
@@ -124,15 +124,15 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__46510),maze_generator$ui$iter__46499_$_iter__46507(cljs.core.chunk_rest(s__46508__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__45835),maze_generator$ui$iter__45814_$_iter__45832(cljs.core.chunk_rest(s__45833__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__46510),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__45835),null);
 }
 } else {
-var x = cljs.core.first(s__46508__$2);
+var x = cljs.core.first(s__45833__$2);
 return cljs.core.cons((function (){var i = ((y * width) + x);
 return daiquiri.core.create_element("span",{'data-test':["(",cljs.core.str.cljs$core$IFn$_invoke$arity$1(x),", ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(y),")"].join(''),'className':daiquiri.util.join_classes(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["cell",maze_generator.ui.compute_class_name(cljs.core.nth.cljs$core$IFn$_invoke$arity$2(cells__$1,i))], null))},[]);
-})(),maze_generator$ui$iter__46499_$_iter__46507(cljs.core.rest(s__46508__$2)));
+})(),maze_generator$ui$iter__45814_$_iter__45832(cljs.core.rest(s__45833__$2)));
 }
 } else {
 return null;
@@ -140,10 +140,10 @@ return null;
 break;
 }
 }),null,null));
-});})(y,s__46500__$2,temp__5753__auto__,cells__$1,map__46498,map__46498__$1,height,width,cells))
+});})(y,s__45815__$2,temp__5753__auto__,cells__$1,map__45813,map__45813__$1,height,width,cells))
 ;
 return iter__4652__auto__(cljs.core.range.cljs$core$IFn$_invoke$arity$1(width));
-})())]),maze_generator$ui$iter__46499(cljs.core.rest(s__46500__$2)));
+})())]),maze_generator$ui$iter__45814(cljs.core.rest(s__45815__$2)));
 }
 } else {
 return null;

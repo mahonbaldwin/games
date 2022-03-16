@@ -9,10 +9,10 @@
   margin-left: -2px;
 }
 .maze.rectangle .start {
-  background-color: lightgreen;
+  background-color: white;
 }
 .maze.rectangle .end {
-  background-color: lightgreen;
+  background-color: white;
 }
 .maze.rectangle .north {
   box-shadow: inset green 0 3px;

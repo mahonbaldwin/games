@@ -20,14 +20,14 @@ return null;
 });
 maze_generator.random.looper = (function maze_generator$random$looper(var_args){
 var args__4870__auto__ = [];
-var len__4864__auto___54423 = arguments.length;
-var i__4865__auto___54424 = (0);
+var len__4864__auto___45752 = arguments.length;
+var i__4865__auto___45753 = (0);
 while(true){
-if((i__4865__auto___54424 < len__4864__auto___54423)){
-args__4870__auto__.push((arguments[i__4865__auto___54424]));
+if((i__4865__auto___45753 < len__4864__auto___45752)){
+args__4870__auto__.push((arguments[i__4865__auto___45753]));
 
-var G__54425 = (i__4865__auto___54424 + (1));
-i__4865__auto___54424 = G__54425;
+var G__45754 = (i__4865__auto___45753 + (1));
+i__4865__auto___45753 = G__45754;
 continue;
 } else {
 }
@@ -43,20 +43,20 @@ while(true){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(n,(0))){
 return return_val;
 } else {
-var G__54426 = rn_fn;
-var G__54427 = (n - (1));
-var G__54428 = func;
-var G__54429 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2((function (){var or__4253__auto__ = return_val;
+var G__45755 = rn_fn;
+var G__45756 = (n - (1));
+var G__45757 = func;
+var G__45758 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2((function (){var or__4253__auto__ = return_val;
 if(cljs.core.truth_(or__4253__auto__)){
 return or__4253__auto__;
 } else {
 return cljs.core.PersistentVector.EMPTY;
 }
 })(),(func.cljs$core$IFn$_invoke$arity$1 ? func.cljs$core$IFn$_invoke$arity$1(rn_fn) : func.call(null,rn_fn)));
-rn_fn = G__54426;
-n = G__54427;
-func = G__54428;
-return_val = G__54429;
+rn_fn = G__45755;
+n = G__45756;
+func = G__45757;
+return_val = G__45758;
 continue;
 }
 break;
@@ -66,15 +66,15 @@ break;
 (maze_generator.random.looper.cljs$lang$maxFixedArity = (3));
 
 /** @this {Function} */
-(maze_generator.random.looper.cljs$lang$applyTo = (function (seq54419){
-var G__54420 = cljs.core.first(seq54419);
-var seq54419__$1 = cljs.core.next(seq54419);
-var G__54421 = cljs.core.first(seq54419__$1);
-var seq54419__$2 = cljs.core.next(seq54419__$1);
-var G__54422 = cljs.core.first(seq54419__$2);
-var seq54419__$3 = cljs.core.next(seq54419__$2);
+(maze_generator.random.looper.cljs$lang$applyTo = (function (seq45748){
+var G__45749 = cljs.core.first(seq45748);
+var seq45748__$1 = cljs.core.next(seq45748);
+var G__45750 = cljs.core.first(seq45748__$1);
+var seq45748__$2 = cljs.core.next(seq45748__$1);
+var G__45751 = cljs.core.first(seq45748__$2);
+var seq45748__$3 = cljs.core.next(seq45748__$2);
 var self__4851__auto__ = this;
-return self__4851__auto__.cljs$core$IFn$_invoke$arity$variadic(G__54420,G__54421,G__54422,seq54419__$3);
+return self__4851__auto__.cljs$core$IFn$_invoke$arity$variadic(G__45749,G__45750,G__45751,seq45748__$3);
 }));
 
 

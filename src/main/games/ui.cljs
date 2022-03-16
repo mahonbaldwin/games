@@ -26,11 +26,10 @@
             [:span.cell {:class (compute-class-name (nth cells i)) :data-test (str "(" x ", " y ")")}]))])]))
 
 (defc root < rum/reactive []
-  (let [seed 98293889112244
-        r (random/rng seed)]
+  (let [seed 98293889112244]
     [:div
      [:h1 "A-maze-ing"]
-     [:div (display-maze (maze/generate {:seed seed :height 40 :width 80}))]]))
+     [:div (display-maze (maze/generate {:seed seed :height 70 :width 60}))]]))
 
 (defn ^:export start []
   (rum/mount (root) (.getElementById js/document "app")))
