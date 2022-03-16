@@ -1,4 +1,4 @@
-(ns maze-generator.random
+(ns games.random
   (:require ["seedrandom" :as sr]))
 
 (defn rng [seed]

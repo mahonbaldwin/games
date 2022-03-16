@@ -1,4 +1,4 @@
-(ns maze-generator.util)
+(ns games.util)
 
 (defn pop-i
   "returns the ith value and returns a coll "
