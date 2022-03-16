@@ -1,7 +1,7 @@
-(ns maze-generator.maze
+(ns games.maze
   (:require [clojure.set :as s]
-            [maze-generator.random :as random]
-            [maze-generator.util :as util]))
+            [games.random :as random]
+            [games.util :as util]))
 
 (defn cell-index [{:keys [x y] :as cell} {:keys [width] :as maze}]
   (+ (* y width) x))

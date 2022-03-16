@@ -1,9 +1,12 @@
-(ns maze-generator.ui
-  (:require [maze-generator.maze :as maze]
-            [maze-generator.random :as random]
-            [reitit.core :as r]
-            [reitit.frontend :as rfe]
-            [rum.core :as rum :refer-macros [defc]]))
+(ns games.ui
+  (:require [games.maze :as maze]
+            [games.random :as random]
+            [reitit.frontend :as rf]
+            [reitit.frontend.controllers :as rfc]
+            [reitit.frontend.easy :as rfe]
+            [reitit.coercion.schema :as rsc]
+            [rum.core :as rum :refer-macros [defc]]
+            [schema.core :as s]))
 
 (defonce page (atom {:location :home}))
 

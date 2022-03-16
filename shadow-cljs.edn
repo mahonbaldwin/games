@@ -3,7 +3,7 @@
  :builds {:app {:target           :browser
                 :compiler-options {:output-feature-set :es-next}
                 :output-dir       "resources/public/js"
-                :modules          {:main {:init-fn maze-generator.ui/start}}
+                :modules          {:main {:init-fn games.ui/start}}
                 :optimizations    :none
                 :devtools         {:preloads  [devtools.preload]
                                    :http-root "resources/public"
