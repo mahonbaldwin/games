@@ -1,0 +1,54 @@
+$wall-color: green
+$maze-background: white
+$start-color: $maze-background
+$end-color: $maze-background
+$wall-width: 3px
+$north-wall: inset $wall-color 0 $wall-width
+$east-wall: $wall-color $wall-width 0
+$south-wall: $wall-color 0 $wall-width
+$west-wall: inset $wall-color $wall-width 0
+$south-east-corner: $wall-color $wall-width $wall-width 0 0
+
+.maze.rectangle
+  .row
+    margin-top: -4px
+  .cell
+    display: inline-block
+    //border-collapse: collapse
+    width: 30px
+    height: 30px
+    background-color: $maze-background
+    margin-left: -2px
+  .start
+    background-color: $start-color
+  .end
+    background-color: $end-color
+  .north
+    box-shadow: $north-wall
+  .north.east
+    box-shadow: $north-wall, $east-wall
+  .north.west
+    box-shadow: $north-wall, $west-wall
+  .north.south
+    box-shadow: $north-wall, $south-wall
+  .north.east.south
+    box-shadow: $north-wall, $east-wall, $south-wall, $south-east-corner
+  .north.east.west
+    box-shadow: $north-wall, $east-wall, $west-wall
+  .north.south.west
+    box-shadow: $north-wall, $south-wall, $west-wall
+  .east
+    box-shadow: $east-wall
+  .east.south
+    box-shadow: $east-wall, $south-wall, $south-east-corner
+  .east.west
+    box-shadow: $east-wall, $west-wall
+  .east.south.west
+    box-shadow: $east-wall, $south-wall, $west-wall, $south-east-corner
+  .south
+    box-shadow: $south-wall
+  .south.west
+    box-shadow: $south-wall, $west-wall
+  .west
+    box-shadow: $west-wall
+//box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;

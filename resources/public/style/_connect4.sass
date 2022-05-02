@@ -1,0 +1,46 @@
+$cell-width-num: 90
+$cell-width: $cell-width-num+px
+$space-width: $cell-width-num*.85+px
+$space-padding: $cell-width-num*.15+px
+$board-color: lightblue
+$player1-color: yellow
+$player2-color: red
+$empty-space-color: white
+
+.cell.small
+  display: inline-block
+  border: solid 1px
+  width: 20px
+  height: 20px
+  border-radius: 10px
+  &.p1
+    background-color: $player1-color
+  &.p2
+    background-color: $player2-color
+
+.connect4
+  display: flex
+  .winner
+    display: none
+  .col
+    display: flex
+    flex-direction: column-reverse
+    .cell
+      display: inline-block
+      background-color: $board-color
+      width: $cell-width
+      height: $cell-width
+      padding: $space-padding
+      &.p1
+        .space
+          background-color: $player1-color
+      &.p2
+        .space
+          background-color: $player2-color
+      .space
+        display: inline-block
+        width: $space-width
+        height: $space-width
+        border-radius: 40px
+        background-color: $empty-space-color
+        margin: 0 auto
