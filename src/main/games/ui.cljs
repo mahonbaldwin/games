@@ -19,7 +19,7 @@
   [:div
    [:h2 "Connect 4"]
    [:div.nav
-    "New Game (select difficulty) "
+    "New Game (select opponent and difficulty) "
     [:span [:a {:href (rfe/href ::connect-4 {:difficulty "human" :human-player "p1"})} "human"] " "]
     (let [s (rand-int 999999999)]
       (for [p ["p1" "p2"]

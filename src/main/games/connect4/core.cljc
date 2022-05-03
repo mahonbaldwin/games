@@ -1,14 +1,17 @@
 (ns games.connect4.core
- (:require [games.connect4.util :as util]))
+ (:require [games.connect4.util :as util]
+           [games.connect4.agent.random-agent :as rand-agent]
+           [games.connect4.agent.eager-agent :as eager-agent]))
 
 ;(defonce game (atom {:turns []}))
 
 (defn new-game
   ([] (new-game {}))
-  ([{:keys [player-1 player-2] :or {player-1 :human player-2 :human} :as opts}]
-   (atom {:turns []
-          :p1 player-1
-          :p2 player-2})))
+  ([{:keys [player-1 player-2 difficulty] :or {player-1 :human player-2 :human} :as opts}]
+   (atom (merge {:turns []
+                 :p1    player-1
+                 :p2    player-2}
+                (when difficulty {:difficulty difficulty})))))
 
 (defn reset-game [game-atom]
   (reset! game-atom {:turns []}))
@@ -134,12 +137,23 @@
         (odd? (count turns)) :p2))
 
 (defn move! [game column]
-  (let [{:keys [turns winner]} @game
-        player (whose-turn @game)]
-    (println :***move! :player player :column column)
+  (let [{:keys [turns winner p1 p2]} @game
+        player (whose-turn @game)
+        next-player (if (= player :p1)
+                      :p2
+                      :p1)]
+    (println :***** :game)
+    (cljs.pprint/pprint @game)
     (when (nil? winner)
       (swap! game (fn [prev-game]
-                    (update prev-game :turns #(conj % {:player player :column column})))))))
+                    (update prev-game :turns #(conj % {:player player :column column}))))
+      (when (not (get-winner (generate-board-state (:turns @game)) (last (:turns @game))))
+        (cond (= :easy (get @game next-player))
+              (swap! game (fn [prev-game]
+                            (let [agent-choice (eager-agent/play @game)]
+                              (println :agent-choice agent-choice)
+                              (update prev-game :turns #(conj % {:player next-player :column agent-choice})))))
+              :else nil)))))
 
 (comment
   (defn visualize-board [b]

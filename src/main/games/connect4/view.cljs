@@ -2,9 +2,7 @@
   (:require [rum.core :as rum :refer-macros [defc]]
             [games.connect4.core :as c4]))
 
-(defonce game-atom (c4/new-game {}))
-
-(defc display-board < rum/reactive []
+(defc display-board < rum/reactive [game-atom]
       (let [g (rum/react game-atom)]
         (let [board (c4/generate-board-state (:turns g))
               winner (c4/get-winner board (last (:turns g)))]
@@ -28,6 +26,12 @@
                                 :class pt :data-coords (str "(" h ", " w ")")}
                     [:span.space]]))])]])))
 
-(defn display [opts]
+(defn display [{:keys [difficulty human-player]}]
   (println :displaying-board)
-  (display-board))
+  (let [p1 (cond (= human-player "p1") :human
+                 :else (keyword difficulty))
+        p2 (cond (= human-player "p2") :human
+                 :else (keyword difficulty))]
+    (display-board (c4/new-game {:player-1   p1
+                                 :player-2   p2
+                                 :difficulty (keyword difficulty)}))))

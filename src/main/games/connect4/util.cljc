@@ -8,6 +8,8 @@
        (remove nil?)))
 
 (defn generate-board-state [turns]
+  (println :***turns)
+  (println turns)
   (reduce
     (fn [p t]
       (assoc-in p [(:column t)] (conj (nth p (:column t)) (:player t))))
